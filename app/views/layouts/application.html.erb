@@ -7,9 +7,34 @@
                                'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application',
                                'data-turbolinks-track': 'reload' %>
+    <!--html5がデフォルトになっているので旧式のinternet Explorerなどでアプリを開いたときサポートの不具合を起こさないようにこのJavaScriptがある-->
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+      </script>
+    <![endif]-->
   </head>
-
+    
   <body>
-    <%= yield %>
+    <!-- サイトのロゴやリンクを表示するヘッダー（header）-->
+    <!-- navbar, navbar-fixed-top, navbar-inverse の３つのCSSクラスが与えられている(Bootstrapによって意味が与えられる) -->
+    <header class="navbar navbar-fixed-top navbar-inverse">
+      <!-- 領域（divタグ）、リンクのリスト -->
+      <!--<div class="container">もBootstrapによって意味が与えられる-->
+      <div class="container">
+        <!--classはページ内で何度でも使用可能、idはページ内で一度しか使えない-->
+        <!--リンクを生成するためにlink_to(Railsヘルパー)を使っていて、'#'(ルーティングヘルパー)はダミー、id:  "logo"はid名-->
+        <%= link_to "Attendance App", '#', id: "logo" %>
+        <nav>
+          <!--ナビゲーションリング-->
+          <!--ulタグに付与されているnav navbar-nav navbar-rightクラスも、Bootstrapでスタイルが与えられる-->
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "Top",  '#' %></li>
+            <li><%= link_to "Log in", '#' %></li>
+          </ul>ルーティングヘルパー
+      </div>
+    </header>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
